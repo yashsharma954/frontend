@@ -9,6 +9,7 @@ import {
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { Platform } from "react-native";
 
 export default function HostRegister() {
   const router = useRouter();
@@ -26,19 +27,23 @@ export default function HostRegister() {
   return phoneRegex.test(phone);
 }
 
-  const pickImage = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({
+
+
+
+const pickImage = async () => {
+  const result = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,
     allowsEditing: true,
-    aspect: [1, 1],
+    aspect: [1,1],
     quality: 1,
   });
 
   if (!result.canceled) {
-    setPhoto(result.assets[0].uri);
+    const imageUri = result.assets[0].uri;
+    console.log("IMAGE URI:", imageUri);
+    setPhoto(imageUri);
   }
 };
-
 const handleRegister = async () => {
 
   if (!name || !phone || !password || !confirm||!username) {
@@ -63,13 +68,31 @@ const handleRegister = async () => {
   formData.append("password", password);
   formData.append("username",username);
 
+  // if (photo) {
+  //   console.log("photo is ",photo);
+  //   formData.append("avatar", {
+  //     uri: photo,
+  //     type: "image/jpeg",
+  //     name: "host.jpg",
+  //   });
+  // }
+  
   if (photo) {
+
+  if (Platform.OS === "web") {
+    const response = await fetch(photo);
+    const blob = await response.blob();
+
+    formData.append("avatar", blob, "host.jpg");
+  } else {
     formData.append("avatar", {
       uri: photo,
       type: "image/jpeg",
       name: "host.jpg",
     });
   }
+
+}
 
   try {
     const res = await fetch(

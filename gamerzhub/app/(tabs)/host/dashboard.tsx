@@ -34,6 +34,32 @@ export default function HostDashboard() {
   getHost();
 }, []);
 
+const logout = async () => {
+  try {
+
+    const token = await AsyncStorage.getItem("token");
+
+    const res=await fetch("http://192.168.31.126:8000/api/v1/host/logout", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  const data =await res.json();
+  console.log("data is ",data);
+
+
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("host");
+    
+
+    router.replace("./login");
+
+  } catch (error) {
+    console.log("Logout error", error);
+  }
+};
+
 
   return (
     <ScrollView style={styles.container}>
@@ -48,17 +74,27 @@ export default function HostDashboard() {
 </Text>
 
 <Text style={styles.hostId}>
-  Host ID: {host?._id}
+  Username: {host?.username}
 </Text>
 
   </View>
 
-  <TouchableOpacity onPress={() => router.push("/host/profile")}>
+  {/* <TouchableOpacity onPress={() => router.push("./profile")}>
     <Image
       source={require("../../../assets/images/icon.png")}
       style={styles.avatar}
     />
-  </TouchableOpacity>
+  </TouchableOpacity> */}
+  <TouchableOpacity onPress={() => router.push("./profile/profileimage")}>
+  <Image
+    source={
+      host?.avatar
+        ? { uri: host.avatar }
+        : require("../../../assets/images/icon.png")
+    }
+    style={styles.avatar}
+  />
+</TouchableOpacity>
 </View>
 
 
@@ -67,7 +103,7 @@ export default function HostDashboard() {
 
         <TouchableOpacity
           style={styles.card}
-          onPress={() => router.push("/host/create")}
+          onPress={() => router.push("./create")}
         >
           <Text style={styles.cardTitle}>➕ Create Tournament</Text>
           <Text style={styles.cardDesc}>
@@ -77,7 +113,7 @@ export default function HostDashboard() {
 
         <TouchableOpacity
           style={styles.card}
-          onPress={() => router.push("/host/my-tournaments")}
+          onPress={() => router.push("./my-tournaments")}
         >
           <Text style={styles.cardTitle}>🏆 My Tournaments</Text>
           <Text style={styles.cardDesc}>
@@ -93,12 +129,11 @@ export default function HostDashboard() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.card, styles.logout]}
-          onPress={() => router.replace("/host/login")}
-        >
-          <Text style={styles.logoutText}>🚪 Logout</Text>
-        </TouchableOpacity>
-
+      style={[styles.card, styles.logout]}
+       onPress={logout}
+         >
+      <Text style={styles.logoutText}>🚪 Logout</Text>
+    </TouchableOpacity>
       </View>
 
     </ScrollView>

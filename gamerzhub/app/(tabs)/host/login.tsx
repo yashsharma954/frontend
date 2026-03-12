@@ -6,7 +6,8 @@ import {
   StyleSheet,
 } from "react-native";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useState,useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
@@ -15,6 +16,12 @@ export default function HostLogin() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  useFocusEffect(
+  useCallback(() => {
+    setUsername("");
+    setPassword("");
+  }, [])
+);
 
   
 const handleLogin = async () => {
@@ -41,12 +48,12 @@ const handleLogin = async () => {
     // 🔥 ASYNC STORAGE SAVE
     await AsyncStorage.setItem(
   "host",
-  JSON.stringify(data.host)
+  JSON.stringify(data.data.host)
 );
 
 await AsyncStorage.setItem(
   "token",
-  data.accessToken
+  data.data.accessToken
 );
 
     router.replace("./dashboard");
@@ -67,7 +74,7 @@ await AsyncStorage.setItem(
       <TextInput
         placeholder="UserName"
         placeholderTextColor="#94a3b8"
-        keyboardType="number-pad"
+        
         style={styles.input}
         value={username}
         onChangeText={setUsername}
@@ -88,7 +95,7 @@ await AsyncStorage.setItem(
      
 
       <TouchableOpacity
-  onPress={() => router.push("./host/forgot")}
+  onPress={() => router.push("./forgotpassword/forgot")}
 >
   <Text style={styles.forgot}>
     Forgot Password?
