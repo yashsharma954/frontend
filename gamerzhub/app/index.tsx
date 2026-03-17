@@ -50,7 +50,7 @@ export default function SplashScreen() {
         }),
       ]),
     ]).start(() => {
-      router.replace("./(auth)/role");
+      router.replace("/(auth)/role");
     });
   }, []);
 

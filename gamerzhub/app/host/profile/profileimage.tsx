@@ -179,7 +179,7 @@ const pickImage = async () => {
     source={
       host?.avatar
         ? { uri: host.avatar }
-        : require("../../../../assets/images/icon.png")
+        : require("../../../assets/images/icon.png")
     }
     style={styles.avatar}
   />

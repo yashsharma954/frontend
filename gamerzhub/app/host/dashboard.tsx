@@ -90,7 +90,7 @@ const logout = async () => {
     source={
       host?.avatar
         ? { uri: host.avatar }
-        : require("../../../assets/images/icon.png")
+        : require("../../assets/images/icon.png")
     }
     style={styles.avatar}
   />
@@ -103,7 +103,7 @@ const logout = async () => {
 
         <TouchableOpacity
           style={styles.card}
-          onPress={() => router.push("./create")}
+          onPress={() => router.push("./tournament/createtournaments")}
         >
           <Text style={styles.cardTitle}>➕ Create Tournament</Text>
           <Text style={styles.cardDesc}>
@@ -113,7 +113,7 @@ const logout = async () => {
 
         <TouchableOpacity
           style={styles.card}
-          onPress={() => router.push("./my-tournaments")}
+          onPress={() => router.push("./tournament/mytournament")}
         >
           <Text style={styles.cardTitle}>🏆 My Tournaments</Text>
           <Text style={styles.cardDesc}>

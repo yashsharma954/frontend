@@ -68,14 +68,7 @@ const handleRegister = async () => {
   formData.append("password", password);
   formData.append("username",username);
 
-  // if (photo) {
-  //   console.log("photo is ",photo);
-  //   formData.append("avatar", {
-  //     uri: photo,
-  //     type: "image/jpeg",
-  //     name: "host.jpg",
-  //   });
-  // }
+  
   
   if (photo) {
 
@@ -139,7 +132,7 @@ const handleRegister = async () => {
     source={
       photo
         ? { uri: photo }
-        : require("../../../assets/images/icon.png")
+        : require("../../assets/images/icon.png")
     }
     style={styles.avatar}
   />

@@ -15,7 +15,7 @@ export default function RoleSelectScreen() {
       {/* PLAYER CARD */}
       <TouchableOpacity
         style={styles.card}
-        onPress={() => router.push("/(tabs)/home")}
+        onPress={() => router.push("../(playertabs)/home")}
       >
         <Text style={styles.icon}>🎮</Text>
         <Text style={styles.cardTitle}>Continue as Player</Text>
