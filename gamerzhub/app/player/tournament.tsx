@@ -37,6 +37,8 @@ useEffect(() => {
 }, []);
 
 
+
+
 const fetchTournaments = async () => {
   try {
     setLoading(true);
@@ -67,6 +69,16 @@ const res = await fetch(
   fetchTournaments();
 }, [activeTab, mode, userLoaded,game]);
 
+const isUserJoinedTournament = (tournament, userId) => {
+  if (!tournament || !userId) return false;
+
+  return tournament.players?.some((team) =>
+    team.members?.some(
+      (m) => String(m.playerId) === String(userId)
+    )
+  );
+};
+
   return (
     <View style={styles.screen}>
 
@@ -96,12 +108,13 @@ const res = await fetch(
   
         {tournaments.map(item =>  {
 
-  console.log("USER ID 👉", userId);
-const isJoined = item.players?.some((team: any) =>
-  team.members?.some(
-    (m: any) => String(m.playerId) === String(userId)
-  )
-);
+  
+// const isJoined = item.players?.some((team: any) =>
+//   team.members?.some(
+//     (m: any) => String(m.playerId) === String(userId)
+//   )
+// );
+const isJoined = isUserJoinedTournament(item, userId);
                    const HostUpcomingCard = ({ item }: any) => (
                        <>
                   <Text style={styles.detail}>
@@ -158,7 +171,13 @@ const HostCompletedCard = ({ item }: any) => (
                                 })}
                           </Text>
                         <TouchableOpacity style={styles.button}
-                         onPress={() => router.push(`./join/${item._id}`)}>
+                         onPress={() => router.push({
+  pathname: "./joinbyphone",
+  params: {
+    id: item._id,
+    
+  },
+  })}>
                            
                         <Text style={styles.buttonText}>Join Tournament</Text>
                      </TouchableOpacity>
