@@ -201,7 +201,7 @@ const HostCompletedCard = ({ item }: any) => (
 
                      {isJoined && (
                   <TouchableOpacity style={styles.roomButton}
-                  onPress={() => router.push(`./room/${item._id}`)}>
+                  onPress={() => router.push({ pathname: "/player/room", params: { id: item._id }})}>
                            <Text style={styles.roomText}>🎮 Join Room</Text>
                              </TouchableOpacity>
                               )}

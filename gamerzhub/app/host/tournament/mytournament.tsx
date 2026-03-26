@@ -84,32 +84,32 @@ const res = await fetch(url, {
   }
 };
 
-const golive = async (tournamentId) => {
-  try {
+// const golive = async (tournamentId) => {
+//   try {
     
-    const res = await fetch("http://192.168.31.126:8000/api/v1/host/tournaments/golive", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        tournamentId,
-      }),
-    });
+//     const res = await fetch("http://192.168.31.126:8000/api/v1/host/tournaments/golive", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         tournamentId,
+//       }),
+//     });
 
-    const data = await res.json();
+//     const data = await res.json();
 
-    if (data.success) {
-      alert(data.message);
-    }
+//     if (data.success) {
+//       alert(data.message);
+//     }
 
    
-    router.replace("./mytournament");
+//     router.replace("./mytournament");
 
-  } catch (err) {
-    alert("Server error");
-  }
-};
+//   } catch (err) {
+//     alert("Server error");
+//   }
+// };
 const endlive = async (tournamentId) => {
   try {
     
@@ -192,7 +192,7 @@ const filteredTournaments = tournaments || [];
                                  </TouchableOpacity>
 
                                <TouchableOpacity style={styles.button}
-                                onPress={() => golive(item._id)}>
+                               onPress={() => router.push({ pathname: "/host/tournament/golive", params: { id: item._id }})}>
                                 <Text style={styles.buttonText}>🚀 Go Live</Text>
                                </TouchableOpacity>
                          </>
