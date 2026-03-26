@@ -187,7 +187,7 @@ const filteredTournaments = tournaments || [];
 
                             <TouchableOpacity 
                             style={styles.button}
-                         onPress={() => router.push(`./host/players/${item._id}`)} >
+                        onPress={() => router.push({ pathname: "/host/joinplayer/player", params: { id: item._id }})} >
                            <Text style={styles.roomText}>👥 Player List</Text>
                                  </TouchableOpacity>
 
@@ -202,7 +202,7 @@ const filteredTournaments = tournaments || [];
                    const HostLiveCard = ({ item }: any) => (
                        <>
                     <TouchableOpacity style={styles.liveButton}
-                     onPress={() => router.push(`./host/upload/${item._id}`)}>
+                     onPress={() => router.push({ pathname: "/host/leaderboard/leader", params: { id: item._id }})}>
                   <Text style={styles.buttonText}>📤 Upload Leaderboard</Text>
                  </TouchableOpacity>
 
@@ -219,9 +219,9 @@ const filteredTournaments = tournaments || [];
 
                const HostCompletedCard = ({ item }: any) => (
                      <TouchableOpacity style={styles.resultButton}
-                     
-                             onPress={() => router.push(`./host/view-result/${item._id}`)
-                               } >
+                     onPress={() => router.push({ pathname: "/host/leaderboard/viewresult", params: { id: item._id }})}
+                             
+                                >
                    <Text style={styles.resultText}>📊 View Leaderboard</Text>
                   </TouchableOpacity>
                       );
