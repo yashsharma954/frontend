@@ -218,7 +218,7 @@ const HostCompletedCard = ({ item }: any) => (
     </Text>
 
     <TouchableOpacity style={styles.resultButton}
-    onPress={() => router.push(`./(tabs)/view-result/${item._id}`)}>
+    onPress={() => router.push({ pathname: "/host/leaderboard/viewresult", params: { id: item._id }})}>
       <Text style={styles.resultText}>View Results</Text>
     </TouchableOpacity>
   </>
