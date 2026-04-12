@@ -23,6 +23,8 @@ export default function TournamentsScreen() {
   const [time, setTime] = useState("");
 const [meridiem, setMeridiem] = useState("PM");
 const { game } = useLocalSearchParams();
+const [search, setSearch] = useState("");
+const [isSearching, setIsSearching] = useState(false);
 
 useEffect(() => {
   const loadUser = async () => {
@@ -36,7 +38,42 @@ useEffect(() => {
   loadUser();
 }, []);
 
+const handleSearch = async () => {
+  try {
+    if (!search.trim()) {
+      setIsSearching(false);
+      fetchTournaments(); // reset
+      return;
+    }
+     setIsSearching(true);
+    setLoading(true);
 
+    const res = await fetch(
+      "http://192.168.31.126:8000/api/v1/player/search",
+      {
+        method: "POST", // 👈 important
+        headers: {
+          "Content-Type": "application/json", // 👈 important
+        },
+        body: JSON.stringify({
+          username: search,
+          game:game,
+          status:activeTab, // 👈 body me bhej rahe
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    console.log("SEARCH RESULT 👉", data);
+
+    setTournaments(data.data || []);
+  } catch (err) {
+    console.log("Search error:", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
 
 const fetchTournaments = async () => {
@@ -63,11 +100,23 @@ const res = await fetch(
     setLoading(false);
   }
 };
-  useEffect(() => {
+//   useEffect(() => {
+//   if (!userLoaded) return;
+
+//    if (!isSearching) {
+//     fetchTournaments(); // 👈 only when NOT searching
+//   }
+// }, [activeTab, mode, userLoaded,game,isSearching]);
+
+useEffect(() => {
   if (!userLoaded) return;
 
-  fetchTournaments();
-}, [activeTab, mode, userLoaded,game]);
+  if (isSearching) {
+    handleSearch(); // 👈 THIS FIX
+  } else {
+    fetchTournaments();
+  }
+}, [activeTab, mode, userLoaded, game]);
 
 const isUserJoinedTournament = (tournament, userId) => {
   if (!tournament || !userId) return false;
@@ -81,6 +130,29 @@ const isUserJoinedTournament = (tournament, userId) => {
 
   return (
     <View style={styles.screen}>
+      {/* 🔍 SEARCH BAR */}
+<View style={styles.searchContainer}>
+  <TextInput
+    placeholder="Search by host username..."
+    placeholderTextColor="#64748b"
+    value={search}
+    // onChangeText={setSearch}
+    onChangeText={(text) => {
+  setSearch(text);
+
+  // 👇 agar empty ho gaya → normal mode
+  if (text.trim() === "") {
+    setIsSearching(false);
+    fetchTournaments();
+  }
+}}
+    style={styles.searchInput}
+  />
+
+  <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
+    <Text style={styles.searchButtonText}>Search</Text>
+  </TouchableOpacity>
+</View>
 
       {/* TABS */}
       <View style={styles.tabs}>
@@ -107,13 +179,6 @@ const isUserJoinedTournament = (tournament, userId) => {
         )}
   
         {tournaments.map(item =>  {
-
-  
-// const isJoined = item.players?.some((team: any) =>
-//   team.members?.some(
-//     (m: any) => String(m.playerId) === String(userId)
-//   )
-// );
 const isJoined = isUserJoinedTournament(item, userId);
                    const HostUpcomingCard = ({ item }: any) => (
                        <>
@@ -330,6 +395,34 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 13,
   },
+  searchContainer: {
+  flexDirection: "row",
+  alignItems: "center",
+  marginBottom: 12,
+},
+
+searchInput: {
+  flex: 1,
+  backgroundColor: "#0f172a",
+  padding: 12,
+  borderRadius: 12,
+  color: "#fff",
+  borderWidth: 1,
+  borderColor: "#1e293b",
+  marginRight: 8,
+},
+
+searchButton: {
+  backgroundColor: "#38bdf8",
+  paddingHorizontal: 16,
+  paddingVertical: 12,
+  borderRadius: 12,
+},
+
+searchButtonText: {
+  color: "#020617",
+  fontWeight: "bold",
+},
 
   /* =====================
      CARD

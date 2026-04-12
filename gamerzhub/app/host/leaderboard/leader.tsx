@@ -5,30 +5,34 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  TextInput
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import { Platform } from "react-native";
+
 import { usePathname } from "expo-router";
 import { useLocalSearchParams, useRouter } from "expo-router";
 
 
 export default function UploadLeaderboardScreen() {
+  const router = useRouter();
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const { id } = useLocalSearchParams();
+  const [leaderboard, setLeaderboard] = useState([
+  { teamName: "", rank: "", prize: "" }
+]);
 
+const addRow = () => {
+  setLeaderboard([...leaderboard, { teamName: "", rank: "", prize: "" }]);
+};
 
-//   const pickImage = async () => {
-//     const result = await ImagePicker.launchImageLibraryAsync({
-//       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-//       quality: 1,
-//     });
-
-//     if (!result.canceled) {
-//       setImage(result.assets[0].uri);
-//     }
-//   };
+const updateField = (index, field, value) => {
+  const updated = [...leaderboard];
+  updated[index][field] = value;
+  setLeaderboard(updated);
+};
 
 const pickImage = async () => {
   const result = await ImagePicker.launchImageLibraryAsync({
@@ -51,12 +55,20 @@ const pickImage = async () => {
       return;
     }
 
+    for (let row of leaderboard) {
+    if (!row.teamName || !row.rank || !row.prize) {
+      alert("Please fill all fields");
+      return;
+    }
+  }
+
     try {
       setLoading(true);
 
       const formData = new FormData();
 
       formData.append("tournamentId",id);
+      formData.append("leaderboardData", JSON.stringify(leaderboard));
       if (image) {
       
         if (Platform.OS === "web") {
@@ -81,6 +93,7 @@ const pickImage = async () => {
       });
 
       alert("✅ Leaderboard Uploaded");
+      router.replace("../tournament/mytournament")
       setImage(null);
     } catch (err) {
       alert("Upload failed");
@@ -92,6 +105,45 @@ const pickImage = async () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🏆 Upload Leaderboard</Text>
+      <View style={styles.table}>
+  <View style={styles.headerRow}>
+    <Text style={styles.header}>Team</Text>
+    <Text style={styles.header}>Rank</Text>
+    <Text style={styles.header}>Prize</Text>
+  </View>
+
+  {leaderboard.map((row, index) => (
+    <View key={index} style={styles.row}>
+      
+      <TextInput
+        placeholder="Team Name"
+        style={styles.input}
+        value={row.teamName}
+        onChangeText={(text) => updateField(index, "teamName", text)}
+      />
+
+      <TextInput
+        placeholder="Rank"
+        style={styles.input}
+        keyboardType="numeric"
+        value={row.rank}
+        onChangeText={(text) => updateField(index, "rank", text)}
+      />
+
+      <TextInput
+        placeholder="₹ Prize"
+        style={styles.input}
+        keyboardType="numeric"
+        value={row.prize}
+        onChangeText={(text) => updateField(index, "prize", text)}
+      />
+    </View>
+  ))}
+
+  <TouchableOpacity onPress={addRow} style={styles.addButton}>
+    <Text style={{ color: "#fff" }}>+ Add Team</Text>
+  </TouchableOpacity>
+</View>
 
       {/* IMAGE PREVIEW */}
       <View style={styles.previewBox}>
@@ -125,6 +177,45 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: "center",
   },
+  table: {
+  marginTop: 16,
+},
+
+headerRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  marginBottom: 8,
+},
+
+header: {
+  color: "#94a3b8",
+  fontWeight: "bold",
+  width: "30%",
+},
+
+row: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  marginBottom: 10,
+},
+
+input: {
+  backgroundColor: "#0f172a",
+  color: "#fff",
+  padding: 10,
+  borderRadius: 8,
+  width: "30%",
+  borderWidth: 1,
+  borderColor: "#1e293b",
+},
+
+addButton: {
+  marginTop: 10,
+  backgroundColor: "#22c55e",
+  padding: 12,
+  borderRadius: 10,
+  alignItems: "center",
+},
 
   title: {
     color: "#38bdf8",

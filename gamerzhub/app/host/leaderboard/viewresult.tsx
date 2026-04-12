@@ -13,6 +13,7 @@ export default function ViewResultScreen() {
 
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [resultTable, setResultTable] = useState([]);
 
   const fetchResult = async () => {
     try {
@@ -27,8 +28,11 @@ export default function ViewResultScreen() {
         alert(data.message);
         return;
       }
+      console.log("data of image is ",data.data.leaderboard);
+      console.log("data of image is ",data.data.leaderboardtable);
 
       setImage(data.data.leaderboard);
+      setResultTable(data.data.leaderboardtable || []);
     } catch (err) {
       console.log(err);
       alert("Server error");
@@ -52,10 +56,67 @@ export default function ViewResultScreen() {
       ) : (
         <Text style={styles.empty}>Result not uploaded yet</Text>
       )}
+      {resultTable.length > 0 && (
+  <View style={styles.table}>
+    
+    {/* HEADER */}
+    <View style={styles.headerRow}>
+      <Text style={styles.header}>Rank</Text>
+      <Text style={styles.header}>Team</Text>
+      <Text style={styles.header}>Prize</Text>
     </View>
+
+    {/* ROWS */}
+    {resultTable.map((item, index) => (
+      <View key={index} style={styles.row}>
+        <Text style={styles.cell}>#{item.rank}</Text>
+        <Text style={styles.cell}>
+          {item.teamName || "N/A"}
+        </Text>
+        <Text style={styles.cell}>₹{item.prize}</Text>
+      </View>
+    ))}
+  </View>
+)}
+    </View>
+    
   );
 }
 const styles = StyleSheet.create({
+  table: {
+  marginTop: 20,
+},
+
+headerRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  borderBottomWidth: 1,
+  borderColor: "#1e293b",
+  paddingBottom: 8,
+  marginBottom: 10,
+},
+
+header: {
+  color: "#38bdf8",
+  fontWeight: "bold",
+  width: "33%",
+  textAlign: "center",
+},
+
+row: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  marginBottom: 10,
+  backgroundColor: "#0f172a",
+  padding: 10,
+  borderRadius: 10,
+},
+
+cell: {
+  color: "#e5e7eb",
+  width: "33%",
+  textAlign: "center",
+},
   container: {
     flex: 1,
     backgroundColor: "#020617",
