@@ -87,7 +87,7 @@
 //       }
      
 
-//       await fetch("http://192.168.31.126:8000/api/v1/host/uploadleaderboard", {
+//       await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/uploadleaderboard", {
 //         method: "POST",
 //         body: formData,
 //       });
@@ -368,7 +368,7 @@ export default function UploadLeaderboardScreen() {
 
     try {
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/uploadleaderboard",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/uploadleaderboard",
         {
           method: "POST",
           body: formData,

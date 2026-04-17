@@ -18,7 +18,7 @@
 //   const fetchResult = async () => {
 //     try {
 //       const res = await fetch(
-//         `http://192.168.31.126:8000/api/v1/host/result/${id}`
+//         `https://gamerzhub-backend.onrender.com/api/v1/host/result/${id}`
 //       );
 
 //       const data = await res.json();
@@ -171,7 +171,7 @@ export default function ViewResultScreen() {
   const fetchResult = async () => {
     try {
       const res = await fetch(
-        `http://192.168.31.126:8000/api/v1/host/result/${id}`
+        `https://gamerzhub-backend.onrender.com/api/v1/host/result/${id}`
       );
 
       const data = await res.json();

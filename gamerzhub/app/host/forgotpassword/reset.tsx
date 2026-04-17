@@ -17,7 +17,7 @@
 //   const updatePassword = async () => {
 //   try {
 
-//     const res = await fetch("http://192.168.31.126:8000/api/v1/host/resetpassword", {
+//     const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/resetpassword", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json"
@@ -168,7 +168,7 @@ export default function ResetPassword() {
     setLoading(true);
     try {
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/resetpassword",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/resetpassword",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

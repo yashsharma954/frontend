@@ -28,7 +28,7 @@
 //       return;
 //     }
 
-//    const res= await fetch("http://192.168.31.126:8000/api/v1/player/sendotp", {
+//    const res= await fetch("https://gamerzhub-backend.onrender.com/api/v1/player/sendotp", {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify({ phone: mobile, 
@@ -46,7 +46,7 @@
 //   const verifyOtp = async () => {
 //     try{
 //     const res = await fetch(
-//       "http://192.168.31.126:8000/api/v1/player/verifyotp",
+//       "https://gamerzhub-backend.onrender.com/api/v1/player/verifyotp",
 //       {
 //         method: "POST",
 //         headers: { "Content-Type": "application/json" },
@@ -90,7 +90,7 @@
 
 //   const resendotp = async ()=>{
 //   try {
-//     const res = await fetch("http://192.168.31.126:8000/api/v1/player/resendotp",{
+//     const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/player/resendotp",{
 //       method:"POST",
 //       headers:{
 //         "Content-Type":"application/json"
@@ -237,7 +237,7 @@ export default function JoinTournament() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://192.168.31.126:8000/api/v1/player/sendotp", {
+      const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/player/sendotp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -271,7 +271,7 @@ export default function JoinTournament() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://192.168.31.126:8000/api/v1/player/verifyotp", {
+      const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/player/verifyotp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -312,7 +312,7 @@ export default function JoinTournament() {
   const resendOtp = async () => {
     setResending(true);
     try {
-      const res = await fetch("http://192.168.31.126:8000/api/v1/player/resendotp", {
+      const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/player/resendotp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: mobile }),

@@ -56,8 +56,8 @@
 
 //     const baseURL =
 //       mode === "HOST"
-//         ? "http://192.168.31.126:8000/api/v1/host/tournaments/my"
-//         : "http://192.168.31.126:8000/api/v1/player/tournaments";
+//         ? "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/my"
+//         : "https://gamerzhub-backend.onrender.com/api/v1/player/tournaments";
 
 //     const url = `${baseURL}?status=${activeTab}`;
 
@@ -87,7 +87,7 @@
 // // const golive = async (tournamentId) => {
 // //   try {
     
-// //     const res = await fetch("http://192.168.31.126:8000/api/v1/host/tournaments/golive", {
+// //     const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/golive", {
 // //       method: "POST",
 // //       headers: {
 // //         "Content-Type": "application/json",
@@ -113,7 +113,7 @@
 // const endlive = async (tournamentId) => {
 //   try {
     
-//     const res = await fetch("http://192.168.31.126:8000/api/v1/host/tournaments/end", {
+//     const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/end", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",
@@ -537,8 +537,8 @@ export default function TournamentsScreen() {
       setLoading(true);
       const baseURL =
         mode === "HOST"
-          ? "http://192.168.31.126:8000/api/v1/host/tournaments/my"
-          : "http://192.168.31.126:8000/api/v1/player/tournaments";
+          ? "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/my"
+          : "https://gamerzhub-backend.onrender.com/api/v1/player/tournaments";
 
       const url = `${baseURL}?status=${activeTab}`;
 
@@ -564,7 +564,7 @@ export default function TournamentsScreen() {
   const endlive = async (tournamentId: string) => {
     try {
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/tournaments/end",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/end",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

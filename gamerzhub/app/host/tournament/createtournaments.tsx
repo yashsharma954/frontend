@@ -123,7 +123,7 @@ export default function CreateTournament() {
       }
 
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/tournaments",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments",
         {
           method: "POST",
           body: formData,

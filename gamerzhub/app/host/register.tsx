@@ -102,7 +102,7 @@
 //     }
 
 //     try {
-//       const res = await fetch("http://192.168.31.126:8000/api/v1/host/register", {
+//       const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/register", {
 //         method: "POST",
 //         body: formData,
 //       });
@@ -438,7 +438,7 @@ export default function HostRegister() {
     }
 
     try {
-      const res = await fetch("http://192.168.31.126:8000/api/v1/host/register", {
+      const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/register", {
         method: "POST",
         body: formData,
       });

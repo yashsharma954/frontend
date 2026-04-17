@@ -16,7 +16,7 @@
 //   const verifyOtp = async () => {
 //   try {
 
-//     const res = await fetch("http://192.168.31.126:8000/api/v1/host/verifyotp", {
+//     const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/verifyotp", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json"
@@ -59,7 +59,7 @@
 
 // const resendotp = async ()=>{
 //   try {
-//     const res = await fetch("http://192.168.31.126:8000/api/v1/host/resendotp",{
+//     const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/resendotp",{
 //       method:"POST",
 //       headers:{
 //         "Content-Type":"application/json"
@@ -230,7 +230,7 @@
 //     setLoading(true);
 //     try {
 //       const res = await fetch(
-//         "http://192.168.31.126:8000/api/v1/host/verifyotp",
+//         "https://gamerzhub-backend.onrender.com/api/v1/host/verifyotp",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
@@ -274,7 +274,7 @@
 //     setResendLoading(true);
 //     try {
 //       const res = await fetch(
-//         "http://192.168.31.126:8000/api/v1/host/resendotp",
+//         "https://gamerzhub-backend.onrender.com/api/v1/host/resendotp",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
@@ -517,7 +517,7 @@ export default function OTPVerify() {
     setLoading(true);
     try {
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/verifyotp",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/verifyotp",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -561,7 +561,7 @@ export default function OTPVerify() {
     setResendLoading(true);
     try {
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/resendotp",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/resendotp",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

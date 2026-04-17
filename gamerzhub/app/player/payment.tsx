@@ -33,7 +33,7 @@
 //   const fetchTournament = async () => {
 //     try {
 //       const res = await fetch(
-//         `http://192.168.31.126:8000/api/v1/player/tournament/${id}`
+//         `https://gamerzhub-backend.onrender.com/api/v1/player/tournament/${id}`
 //       );
 
 //       const data = await res.json();
@@ -84,7 +84,7 @@
 //     }
 
 //     const res = await fetch(
-//       `http://192.168.31.126:8000/api/v1/player/join`,
+//       `https://gamerzhub-backend.onrender.com/api/v1/player/join`,
 //       {
 //         method: "POST",
 //         headers: {
@@ -245,7 +245,7 @@ export default function PaymentScreen() {
     const fetchTournament = async () => {
       try {
         const res = await fetch(
-          `http://192.168.31.126:8000/api/v1/player/tournament/${id}`
+          `https://gamerzhub-backend.onrender.com/api/v1/player/tournament/${id}`
         );
         const data = await res.json();
 
@@ -288,7 +288,7 @@ export default function PaymentScreen() {
       }
 
       const res = await fetch(
-        `http://192.168.31.126:8000/api/v1/player/join`,
+        `https://gamerzhub-backend.onrender.com/api/v1/player/join`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

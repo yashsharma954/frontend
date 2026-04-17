@@ -21,7 +21,7 @@
 
 //     try {
 //       const res = await fetch(
-//         `http://192.168.31.126:8000/api/v1/host/tournaments/liveroom/${id}`
+//         `https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/liveroom/${id}`
 //       );
 
 //       const data = await res.json();
@@ -149,7 +149,7 @@ export default function RoomDetailScreen() {
   const fetchRoom = async () => {
     try {
       const res = await fetch(
-        `http://192.168.31.126:8000/api/v1/host/tournaments/liveroom/${id}`
+        `https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/liveroom/${id}`
       );
 
       const data = await res.json();

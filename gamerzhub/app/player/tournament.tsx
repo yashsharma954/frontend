@@ -49,7 +49,7 @@
 //     setLoading(true);
 
 //     const res = await fetch(
-//       "http://192.168.31.126:8000/api/v1/player/search",
+//       "https://gamerzhub-backend.onrender.com/api/v1/player/search",
 //       {
 //         method: "POST", // 👈 important
 //         headers: {
@@ -82,8 +82,8 @@
 
 //     const baseURL =
 //       mode === "HOST"
-//         ? "http://192.168.31.126:8000/api/v1/host/tournaments/my"
-//         : "http://192.168.31.126:8000/api/v1/player/tournaments";
+//         ? "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/my"
+//         : "https://gamerzhub-backend.onrender.com/api/v1/player/tournaments";
 // const res = await fetch(
 //   `${baseURL}?status=${activeTab}&game=${game || ""}`
 // );
@@ -628,7 +628,7 @@ export default function PlayerTournamentsScreen() {
   const fetchTournaments = async () => {
     try {
       setLoading(true);
-      const baseURL = "http://192.168.31.126:8000/api/v1/player/tournaments";
+      const baseURL = "https://gamerzhub-backend.onrender.com/api/v1/player/tournaments";
       const url = `${baseURL}?status=${activeTab}&game=${game || ""}`;
 
       const res = await fetch(url);
@@ -654,7 +654,7 @@ export default function PlayerTournamentsScreen() {
       setLoading(true);
 
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/player/search",
+        "https://gamerzhub-backend.onrender.com/api/v1/player/search",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

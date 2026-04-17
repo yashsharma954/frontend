@@ -39,7 +39,7 @@
 
 //     const token = await AsyncStorage.getItem("token");
 
-//     const res=await fetch("http://192.168.31.126:8000/api/v1/host/logout", {
+//     const res=await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/logout", {
 //       method: "POST",
 //       headers: {
 //         Authorization: `Bearer ${token}`,
@@ -266,7 +266,7 @@ export default function HostDashboard() {
     try {
       const token = await AsyncStorage.getItem("token");
 
-      await fetch("http://192.168.31.126:8000/api/v1/host/logout", {
+      await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

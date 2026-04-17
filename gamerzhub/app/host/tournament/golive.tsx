@@ -16,7 +16,7 @@
 //     }
 
 //     try {
-//       const res = await fetch("http://192.168.31.126:8000/api/v1/host/tournaments/golive", {
+//       const res = await fetch("https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/golive", {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export default function GoLiveScreen() {
 
     try {
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/tournaments/golive",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/golive",
         {
           method: "POST",
           headers: {

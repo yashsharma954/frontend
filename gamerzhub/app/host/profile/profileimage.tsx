@@ -37,7 +37,7 @@
 // const token = await AsyncStorage.getItem("token")
 
 // const res = await fetch(
-//   "http://192.168.31.126:8000/api/v1/host/updateusername",
+//   "https://gamerzhub-backend.onrender.com/api/v1/host/updateusername",
 //   {
 //     method:"PUT",
 //     headers:{
@@ -113,7 +113,7 @@
 //     }
 
 //     const res = await fetch(
-//       "http://192.168.31.126:8000/api/v1/host/updateprofile",
+//       "https://gamerzhub-backend.onrender.com/api/v1/host/updateprofile",
 //       {
 //         method: "PUT",
 //         headers: {
@@ -317,7 +317,7 @@ export default function HostProfile() {
       const token = await AsyncStorage.getItem("token");
 
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/updateusername",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/updateusername",
         {
           method: "PUT",
           headers: {
@@ -389,7 +389,7 @@ export default function HostProfile() {
       }
 
       const res = await fetch(
-        "http://192.168.31.126:8000/api/v1/host/updateprofile",
+        "https://gamerzhub-backend.onrender.com/api/v1/host/updateprofile",
         {
           method: "PUT",
           headers: {
