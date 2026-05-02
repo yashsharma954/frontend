@@ -36,33 +36,112 @@
 
 
 
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+// import { Tabs } from "expo-router";
+// import { Ionicons } from "@expo/vector-icons";
+
+// export default function TabsLayout() {
+//   return (
+//     <Tabs screenOptions={{ headerShown: false }}>
+
+//       <Tabs.Screen
+//         name="../player/home"
+//         options={{
+//           title: "Home",
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="home" size={size} color={color} />
+//           ),
+//         }}
+//       />
+
+//       <Tabs.Screen
+//         name="explore"
+//         options={{
+//           title: "Explore",
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="search" size={size} color={color} />
+//           ),
+//         }}
+//       />
+
+//     </Tabs>
+//   );
+// }
+
+// import { Tabs } from 'expo-router';
+// import { Ionicons } from '@expo/vector-icons';
+
+// export default function TabsLayout() {
+//   return (
+//     <Tabs
+//       screenOptions={{
+//         headerShown: false,        // header yahan nahi chahiye kyunki drawer ka header use hoga
+//       }}
+//     >
+//       <Tabs.Screen
+//         name="home"                // yeh (tabs)/home.tsx se match karega
+//         options={{
+//           title: 'Home',
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="home" size={size} color={color} />
+//           ),
+//         }}
+//       />
+
+//       <Tabs.Screen
+//         name="explore"
+//         options={{
+//           title: 'Explore',
+//           tabBarIcon: ({ color, size }) => (
+//             <Ionicons name="search" size={size} color={color} />
+//           ),
+//         }}
+//       />
+//     </Tabs>
+//   );
+// }
+
+
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { DrawerToggleButton } from '@react-navigation/drawer';
 
 export default function TabsLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
-
+    <Tabs
+      screenOptions={{
+        headerShown: false,        // Default sab tabs pe header hide
+        tabBarStyle: { backgroundColor: '#0f172a' }, // optional
+      }}
+    >
+      {/* === SIRF HOME PE HEADER + HAMBURGER === */}
       <Tabs.Screen
-        name="../player/home"
+        name="home"
         options={{
-          title: "Home",
+          title: 'Home',
+          headerShown: true,                          // ← Sirf yahan header on
+          headerLeft: () => <DrawerToggleButton />,   // ← Yeh 3 lines wala button
+          // headerTitle: 'GamerzHub',
+          headerStyle: {
+            backgroundColor: '#0f172a',
+          },
+          headerTintColor: '#440aa8',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
         }}
       />
 
+      {/* Explore - No Header */}
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
+          title: 'Explore',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="search" size={size} color={color} />
           ),
         }}
       />
-
     </Tabs>
   );
 }
