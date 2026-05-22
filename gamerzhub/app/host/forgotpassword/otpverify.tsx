@@ -549,7 +549,7 @@ export default function OTPVerify() {
             });
     } catch (error: any) {
       console.log("OTP verify error:", error);
-      Alert.alert("Error", error.message || "Something went wrong");
+      alert("Error", error.message || "Something went wrong");
     } finally {
       setLoading(false);
     }

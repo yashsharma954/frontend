@@ -498,6 +498,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { usePathname } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Ionicons } from "@expo/vector-icons";
 
 type TabType = "LIVE" | "UPCOMING" | "COMPLETED";
 type ScreenMode = "PLAYER" | "HOST";
@@ -583,6 +584,79 @@ export default function TournamentsScreen() {
       alert("Server error");
     }
   };
+  // const handleGoLive = async (tournamentId: string) => {
+
+  //   setLoading(true);
+
+  //   try {
+  //     const res = await fetch(
+  //       "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/golive",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //        body: JSON.stringify({ tournamentId }),
+  //       }
+  //     );
+
+  //     const data = await res.json();
+
+  //     if (data.success) {
+  //       alert(
+  //         "🚀 Tournament is Now LIVE! Players can now join the room.", 
+  //       );
+  //       router.push("./mytournament")
+  //     } else {
+  //       alert("Failed Something went wrong"+ data.message);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert("Server Error Unable to connect. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  const handleGoLive = async (tournamentId: string) => {
+  if (!tournamentId) {
+    Alert.alert("Error", "Tournament ID is missing");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const res = await fetch(
+      "https://gamerzhub-backend.onrender.com/api/v1/host/tournaments/golive",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${await AsyncStorage.getItem("token")}`, // ← Token add kiya
+        },
+        body: JSON.stringify({ tournamentId }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+      Alert.alert(
+        "🎉 Success",
+        "Tournament is Now LIVE! Players can now see and join it.",
+        [{ text: "OK", onPress: () => router.replace("./mytournament") }]
+      );
+    } else {
+      Alert.alert("Failed", data.message || "Something went wrong");
+    }
+  } catch (error) {
+    console.error("Go Live Error:", error);
+    Alert.alert("Server Error", "Unable to connect. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const userId = "65c1a9f0a1b2c3d4e5f67890"; // Replace with actual logged-in user ID later
 
@@ -641,6 +715,7 @@ export default function TournamentsScreen() {
           const isJoined = item.players?.some(
             (playerId: any) => playerId.toString() === userId
           );
+          // ye common imformation ha jo har card me jayegi 
 
           return (
             <View key={item._id} style={styles.card}>
@@ -671,6 +746,17 @@ export default function TournamentsScreen() {
                     👥 {item.currentTeams || item.joinedSlots || 0}/{item.maxTeams || item.slots}
                   </Text>
                 </View>
+
+                <View style={styles.infoContainer}>
+              {/* <Text style={styles.title}>{item.title}</Text> */}
+              <Text style={styles.game}>
+                {item.game} • {item.matchType} {item.totalRounds ? `• ${item.totalRounds} Rounds` : ""}
+              </Text>
+
+              
+
+              
+            </View>
 
                 {activeTab === "UPCOMING" && (
                   <Text style={styles.time}>
@@ -730,25 +816,23 @@ export default function TournamentsScreen() {
                   </TouchableOpacity>
                 )}
 
-                {/* HOST BUTTONS */}
-                {mode === "HOST" && activeTab === "UPCOMING" && (
-                  <>
-                    <TouchableOpacity
-                      style={styles.playerListButton}
-                      onPress={() => router.push({ pathname: "/host/joinplayer/player", params: { id: item._id } })}
-                    >
-                      <Text style={styles.playerListText}>👥 PLAYER LIST</Text>
-                    </TouchableOpacity>
+               {mode === "HOST" && activeTab === "UPCOMING" && (
+                <>
+                  <TouchableOpacity
+                    style={styles.playerListButton}
+                    onPress={() => router.push({ pathname: "/host/joinplayer/player", params: { id: item._id } })}
+                  >
+                    <Text style={styles.playerListText}>👥 PLAYER LIST</Text>
+                  </TouchableOpacity>
 
-                    <TouchableOpacity
-                      style={styles.goLiveButton}
-                      onPress={() => router.push({ pathname: "/host/tournament/golive", params: { id: item._id } })}
-                    >
-                      <Text style={styles.goLiveText}>🚀 GO LIVE</Text>
-                    </TouchableOpacity>
-                  </>
-                )}
-
+                  <TouchableOpacity
+                    style={styles.goLiveButton}
+                    onPress={() => handleGoLive(item._id)}
+                  >
+                    <Text style={styles.goLiveText}>🚀 GO LIVE</Text>
+                  </TouchableOpacity>
+                </>
+              )}
                 {mode === "HOST" && activeTab === "LIVE" && (
                   <>
                     <TouchableOpacity
@@ -948,17 +1032,153 @@ const styles = StyleSheet.create({
     color: "#e2e8f0",
     fontWeight: "600",
   },
-  goLiveButton: {
-    backgroundColor: "#22c55e",
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: "center",
-  },
-  goLiveText: {
-    color: "#0f172a",
-    fontWeight: "800",
-    fontSize: 16,
-  },
+  tournamentCard: {
+  backgroundColor: "#1e2937",
+  borderRadius: 16,
+  padding: 16,
+  marginBottom: 16,
+  borderWidth: 1,
+  borderColor: "#334155",
+},
+
+cardHeader: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: 12,
+},
+
+tournamentTitle: {
+  fontSize: 18,
+  fontWeight: "700",
+  color: "#fff",
+  flex: 1,
+},
+
+// statusBadge: {
+//   backgroundColor: "#22c55e",
+//   paddingHorizontal: 12,
+//   paddingVertical: 4,
+//   borderRadius: 20,
+// },
+
+// statusText: {
+//   color: "#0f172a",
+//   fontSize: 12,
+//   fontWeight: "700",
+// },
+
+infoRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  marginBottom: 12,
+},
+
+gameText: {
+  color: "#67e8f9",
+  fontWeight: "600",
+},
+
+roundsText: {
+  color: "#a5b4fc",
+  fontWeight: "600",
+},
+
+prizeRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: 12,
+},
+
+prizeLabel: {
+  color: "#94a3b8",
+  fontSize: 12,
+},
+
+prizeAmount: {
+  color: "#facc15",
+  fontSize: 20,
+  fontWeight: "800",
+},
+
+teamsContainer: {
+  alignItems: "flex-end",
+},
+
+teamsLabel: {
+  color: "#94a3b8",
+  fontSize: 13,
+  marginBottom: 4,
+},
+
+progressBar: {
+  width: 120,
+  height: 6,
+  backgroundColor: "#334155",
+  borderRadius: 10,
+  overflow: "hidden",
+},
+
+progressFill: {
+  height: "100%",
+  backgroundColor: "#22d3ee",
+},
+
+dateRow: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+  marginBottom: 16,
+},
+
+dateText: {
+  color: "#94a3b8",
+  fontSize: 14,
+},
+
+actionButtons: {
+  flexDirection: "row",
+  gap: 12,
+},
+
+// playerListButton: {
+//   flex: 1,
+//   backgroundColor: "#334155",
+//   paddingVertical: 14,
+//   borderRadius: 12,
+//   alignItems: "center",
+// },
+
+// playerListText: {
+//   color: "#e0f2fe",
+//   fontWeight: "600",
+// },
+
+goLiveButton: {
+  flex: 1,
+  backgroundColor: "#22c55e",
+  paddingVertical: 14,
+  borderRadius: 12,
+  alignItems: "center",
+},
+
+goLiveText: {
+  color: "#0f172a",
+  fontWeight: "800",
+  fontSize: 16,
+},
+  // goLiveButton: {
+  //   backgroundColor: "#22c55e",
+  //   paddingVertical: 14,
+  //   borderRadius: 14,
+  //   alignItems: "center",
+  // },
+  // goLiveText: {
+  //   color: "#0f172a",
+  //   fontWeight: "800",
+  //   fontSize: 16,
+  // },
   uploadButton: {
     backgroundColor: "#eab308",
     paddingVertical: 14,

@@ -37,7 +37,7 @@
 //       setRoomId(data.data.roomId);
 //       setRoomPassword(data.data.roompassword);
 //     } catch (err) {
-//       Alert.alert("Server error");
+//       alert("Server error");
 //     } finally {
 //       setLoading(false);
 //     }

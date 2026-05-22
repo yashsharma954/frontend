@@ -1,99 +1,69 @@
-// import { Tabs } from 'expo-router';
-// import React from 'react';
-
-// import { HapticTab } from '@/components/haptic-tab';
-// import { IconSymbol } from '@/components/ui/icon-symbol';
-// import { Colors } from '@/constants/theme';
-// import { useColorScheme } from '@/hooks/use-color-scheme';
-
-// export default function TabLayout() {
-//   const colorScheme = useColorScheme();
-
-//   return (
-//     <Tabs
-//       screenOptions={{
-//         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-//         headerShown: false,
-//         tabBarButton: HapticTab,
-//       }}>
-//       <Tabs.Screen
-//         name="index"
-//         options={{
-//           title: 'Home',
-//           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-//         }}
-//       />
-//       <Tabs.Screen
-//         name="explore"
-//         options={{
-//           title: 'Explore',
-//           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-//         }}
-//       />
-//     </Tabs>
-//   );
-// }
 
 
 
-// import { Tabs } from "expo-router";
-// import { Ionicons } from "@expo/vector-icons";
-
-// export default function TabsLayout() {
-//   return (
-//     <Tabs screenOptions={{ headerShown: false }}>
-
-//       <Tabs.Screen
-//         name="../player/home"
-//         options={{
-//           title: "Home",
-//           tabBarIcon: ({ color, size }) => (
-//             <Ionicons name="home" size={size} color={color} />
-//           ),
-//         }}
-//       />
-
-//       <Tabs.Screen
-//         name="explore"
-//         options={{
-//           title: "Explore",
-//           tabBarIcon: ({ color, size }) => (
-//             <Ionicons name="search" size={size} color={color} />
-//           ),
-//         }}
-//       />
-
-//     </Tabs>
-//   );
-// }
 
 // import { Tabs } from 'expo-router';
 // import { Ionicons } from '@expo/vector-icons';
+// import { DrawerToggleButton } from '@react-navigation/drawer';
 
 // export default function TabsLayout() {
 //   return (
 //     <Tabs
 //       screenOptions={{
-//         headerShown: false,        // header yahan nahi chahiye kyunki drawer ka header use hoga
+//         headerShown: false,           // default sab tabs pe header band
+//         tabBarStyle: { backgroundColor: '#0f172a' },
+//         tabBarActiveTintColor: '#440aa8',
+//         tabBarInactiveTintColor: '#94a3b8',
 //       }}
 //     >
 //       <Tabs.Screen
-//         name="home"                // yeh (tabs)/home.tsx se match karega
+//         name="home"                   // yeh (playertabs)/home.tsx hoga
 //         options={{
 //           title: 'Home',
+//           headerShown: true,          // sirf home pe header on
+//           headerLeft: () => <DrawerToggleButton tintColor="#440aa8" />,
+//           headerStyle: { backgroundColor: '#0f172a' },
+//           headerTintColor: '#440aa8',
 //           tabBarIcon: ({ color, size }) => (
 //             <Ionicons name="home" size={size} color={color} />
 //           ),
 //         }}
 //       />
 
-//       <Tabs.Screen
+//       {/* Explore tab (agar chahiye to uncomment) */}
+//       {/* <Tabs.Screen
 //         name="explore"
 //         options={{
 //           title: 'Explore',
 //           tabBarIcon: ({ color, size }) => (
 //             <Ionicons name="search" size={size} color={color} />
 //           ),
+//         }}
+//       /> */}
+//     </Tabs>
+//   );
+// }
+
+
+// import { Tabs } from 'expo-router';
+// import { Ionicons } from '@expo/vector-icons';
+// import { DrawerToggleButton } from '@react-navigation/drawer';
+
+// export default function TabsLayout() {
+//   return (
+//     <Tabs
+//       screenOptions={{
+//         headerShown: false,
+//         tabBarStyle: { backgroundColor: '#0f172a' },
+//       }}
+//     >
+//       <Tabs.Screen
+//         name="home"
+//         options={{
+//           title: 'Home',
+//           headerShown: true,
+//           headerLeft: () => <DrawerToggleButton />,
+//           tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} />,
 //         }}
 //       />
 //     </Tabs>
@@ -103,42 +73,23 @@
 
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { DrawerToggleButton } from '@react-navigation/drawer';
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,        // Default sab tabs pe header hide
-        tabBarStyle: { backgroundColor: '#0f172a' }, // optional
+        headerShown: false,
+        tabBarStyle: { backgroundColor: '#0f172a' },
+        tabBarActiveTintColor: '#67e8f9',
+        tabBarInactiveTintColor: '#94a3b8',
       }}
     >
-      {/* === SIRF HOME PE HEADER + HAMBURGER === */}
       <Tabs.Screen
         name="home"
         options={{
           title: 'Home',
-          headerShown: true,                          // ← Sirf yahan header on
-          headerLeft: () => <DrawerToggleButton />,   // ← Yeh 3 lines wala button
-          // headerTitle: 'GamerzHub',
-          headerStyle: {
-            backgroundColor: '#0f172a',
-          },
-          headerTintColor: '#440aa8',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
-          ),
-        }}
-      />
-
-      {/* Explore - No Header */}
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="search" size={size} color={color} />
           ),
         }}
       />

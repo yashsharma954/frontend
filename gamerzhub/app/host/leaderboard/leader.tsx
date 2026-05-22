@@ -335,13 +335,13 @@ export default function UploadLeaderboardScreen() {
 
   const handleUpload = async () => {
     if (!image) {
-      Alert.alert("Missing Screenshot", "Please select a leaderboard screenshot");
+      alert("Missing Screenshot", "Please select a leaderboard screenshot");
       return;
     }
 
     for (let row of leaderboard) {
       if (!row.teamName.trim() || !row.rank || !row.prize) {
-        Alert.alert("Incomplete Data", "Please fill all fields for every team");
+        alert("Incomplete Data", "Please fill all fields for every team");
         return;
       }
     }
@@ -378,14 +378,14 @@ export default function UploadLeaderboardScreen() {
       const data = await res.json();
 
       if (data.success) {
-        Alert.alert("✅ Success!", "Leaderboard uploaded successfully");
+        alert("✅ Success!", "Leaderboard uploaded successfully");
         router.replace("../mytournament");
       } else {
-        Alert.alert("Upload Failed", data.message || "Something went wrong");
+        alert("Upload Failed", data.message || "Something went wrong");
       }
     } catch (err) {
       console.log(err);
-      Alert.alert("Error", "Failed to upload leaderboard");
+      alert("Error", "Failed to upload leaderboard");
     } finally {
       setLoading(false);
     }

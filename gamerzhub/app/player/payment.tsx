@@ -260,7 +260,7 @@ export default function PaymentScreen() {
         }
       } catch (error) {
         console.log("Fetch error:", error);
-        Alert.alert("Error", "Failed to load tournament details");
+        alert("Error", "Failed to load tournament details");
       }
     };
 
@@ -283,7 +283,7 @@ export default function PaymentScreen() {
       const playerId = await AsyncStorage.getItem("tempUserId");
 
       if (!playerId) {
-        Alert.alert("Session Expired", "Please verify your number again");
+        alert("Session Expired", "Please verify your number again");
         return;
       }
 

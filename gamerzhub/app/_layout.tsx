@@ -1,19 +1,85 @@
-
-
-// import { Stack } from "expo-router";
-
+// import { Drawer } from 'expo-router/drawer';
+// import { GestureHandlerRootView } from 'react-native-gesture-handler';
 // export default function RootLayout() {
 //   return (
-//     <Stack screenOptions={{ headerShown: false }} />
+//     <GestureHandlerRootView style={{ flex: 1 }}>
+//       <Drawer
+//         screenOptions={{
+//           headerShown: false,
+//           drawerStyle: {
+//             width: 300,
+//             backgroundColor: '#0f172a',
+//           },
+//           drawerActiveBackgroundColor: '#1e40af',
+//           drawerActiveTintColor: '#ffffff',
+//           drawerInactiveTintColor: '#94a3b8',
+//           drawerLabelStyle: { fontSize: 16, fontWeight: '500' },
+//         }}
+//       >
+//         {/* ================== Sirf Yeh Items Drawer Mein Dikhenge ================== */}
+
+//         <Drawer.Screen
+//           name="(playertabs)"
+//           options={{
+//             drawerLabel: '🏠 Home',
+//             title: 'Home',
+//           }}
+//         />
+
+//         {/* <Drawer.Screen
+//           name="explore"
+//           options={{
+//             drawerLabel: '🔍 Explore Tournaments',
+//             title: 'Explore',
+//           }}
+//         /> */}
+
+//         <Drawer.Screen
+//           name="player/room"
+//           options={{
+//             drawerLabel: '🎮 My Room / Join Room',
+//             title: 'My Room',
+//           }}
+//         />
+
+//         <Drawer.Screen
+//           name="player/tournament"
+//           options={{
+//             drawerLabel: '🏆 My Tournaments',
+//             title: 'My Tournaments',
+//           }}
+//         />
+
+//         <Drawer.Screen
+//           name="player/payment"
+//           options={{
+//             drawerLabel: '💰 Wallet & Payments',
+//             title: 'Wallet',
+//           }}
+//         />
+
+//         {/* Logout (optional) */}
+//         <Drawer.Screen
+//           name="logout"   // agar logout screen bana hai to
+//           options={{
+//             drawerLabel: '🚪 Logout',
+//             title: 'Logout',
+//           }}
+//         />
+
+//       </Drawer>
+//     </GestureHandlerRootView>
 //   );
 // }
 
 
+// // import { Tabs } from 'expo-router';
 
-
+// // export default function RootLayout() {
+// //   return <Tabs screenOptions={{ headerShown: false }} />;
+// // }
 
 // import { Drawer } from 'expo-router/drawer';
-// import { DrawerToggleButton } from '@react-navigation/drawer';
 // import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // export default function RootLayout() {
@@ -21,19 +87,42 @@
 //     <GestureHandlerRootView style={{ flex: 1 }}>
 //       <Drawer
 //         screenOptions={{
-//           headerShown: true,                    // Header dikhega
-//           headerLeft: () => <DrawerToggleButton />, // Yeh automatic 3 lines wala button deta hai
-//           drawerStyle: { width: 280 },          // Optional: drawer ki width
+//           headerShown: false,
+//           drawerStyle: { width: 300, backgroundColor: '#0f172a' },
+//           drawerActiveBackgroundColor: '#1e40af',
+//           drawerActiveTintColor: '#ffffff',
+//           drawerInactiveTintColor: '#94a3b8',
 //         }}
 //       >
-//         {/* Drawer mein sirf yeh ek entry hoga jo pura tabs group kholega */}
 //         <Drawer.Screen
-//           name="(tabs)"
-//           options={{
-//             title: 'GamerzHub',
-//             drawerLabel: 'Main Menu',
-//             headerTitle: 'GamerzHub',           // Header mein title
-//           }}
+//           name="(playertabs)"
+//           options={{ drawerLabel: '🏠 Home', title: 'Home' }}
+//         />
+
+//         <Drawer.Screen
+//           name="player/room"
+//           options={{ drawerLabel: '🎮 My Room / Join Room' }}
+//         />
+
+//         <Drawer.Screen
+//           name="player/tournament"
+//           options={{ drawerLabel: '🏆 My Tournaments' }}
+//         />
+
+//         <Drawer.Screen
+//           name="player/payment"
+//           options={{ drawerLabel: '💰 Wallet & Payments' }}
+//         />
+
+//         {/* Host Section (Optional - agar drawer mein chahiye to) */}
+//         <Drawer.Screen
+//           name="(host)"
+//           options={{ drawerLabel: '🎤 Host Dashboard', title: 'Host' }}
+//         />
+
+//         <Drawer.Screen
+//           name="logout"
+//           options={{ drawerLabel: '🚪 Logout' }}
 //         />
 //       </Drawer>
 //     </GestureHandlerRootView>
@@ -41,100 +130,44 @@
 // }
 
 
-// import { Drawer } from 'expo-router/drawer';
-// import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-// export default function RootLayout() {
-//   return (
-//     <GestureHandlerRootView style={{ flex: 1 }}>
-//       <Drawer
-//         screenOptions={{
-//           headerShown: false,        // ← Sab jagah header hide by default
-//           drawerStyle: { width: 280 },
-//         }}
-//       >
-//         <Drawer.Screen
-//           name="(playertabs)"
-//           options={{
-//             // title: 'GamerzHub',
-          //   drawerLabel: 'Main',
-          // }}
-        // />
-
-        {/* Agar aur screens hain jaise role, profile etc. to unko bhi add kar sakte ho */}
-        {/* <Drawer.Screen name="(auth)" options={{ drawerLabel: 'Auth' }} /> */}
-//       </Drawer>
-//     </GestureHandlerRootView>
-//   );
-// }
-
-
-import { Drawer } from 'expo-router/drawer';
+import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer
+      <Stack
         screenOptions={{
-          headerShown: false,
-          drawerStyle: { width: 300 },
-          drawerActiveBackgroundColor: '#3b82f6',
-          drawerActiveTintColor: '#fff',
-          drawerInactiveTintColor: '#cbd5e1',
+          headerShown: false,           // Default header hide
+          animation: 'slide_from_right',
+          contentStyle: { backgroundColor: '#0a0e17' },
         }}
       >
-        {/* Sirf yeh screens Drawer mein dikhenge */}
-        <Drawer.Screen
-          name="(playertabs)"
-          options={{
-            title: 'Home',
-            drawerLabel: '🏠 Home',
-            headerShown: false,
-          }}
+        {/* Root Redirect Screen */}
+        <Stack.Screen name="index" />
+
+        {/* Player Tabs Group */}
+        <Stack.Screen 
+          name="(playertabs)" 
+          options={{ animation: 'fade' }} 
         />
 
-        <Drawer.Screen
-          name="explore"                    // Agar explore alag screen hai to
-          options={{
-            title: 'Explore',
-            drawerLabel: '🔍 Explore',
-          }}
+        {/* Host Group */}
+        <Stack.Screen 
+          name="(host)" 
+          options={{ animation: 'fade' }} 
         />
 
-        {/* Join Room / My Room - Yeh important hai tumhare liye */}
-        <Drawer.Screen
-          name="player/room"                 // apna actual path daal do
-          options={{
-            title: 'Join Room',
-            drawerLabel: '🎮 My Room / Join Room',
-          }}
-        />
+        {/* Auth Screens */}
+        <Stack.Screen name="(auth)" />
 
-        <Drawer.Screen
-          name="player/tournament"           // My Tournaments
-          options={{
-            title: 'My Tournaments',
-            drawerLabel: '🏆 My Tournaments',
-          }}
-        />
-        <Drawer
-  screenOptions={{
-    headerShown: false,
-    drawerStyle: { width: 300 },
-  }}
-  // Yeh important hai - sirf jo explicitly Drawer.Screen mein define kiye hain wahi dikhega
-></Drawer>
-
-        {/* Agar aur chahiye to yahan add kar sakte ho */}
-        {/* 
-        <Drawer.Screen 
-          name="profile" 
-          options={{ drawerLabel: '👤 Profile' }} 
-        /> 
-        */}
-
-      </Drawer>
+        {/* Other Individual Screens */}
+        <Stack.Screen name="player/room" />
+        <Stack.Screen name="player/tournament" />
+        <Stack.Screen name="player/payment" />
+        <Stack.Screen name="logout" />
+      </Stack>
     </GestureHandlerRootView>
   );
 }
